@@ -287,7 +287,7 @@ export default class SplitComponent extends React.Component<ISplitEditorProps> {
           editor.setOption(option as any, this.props[option]);
         } else if (this.props[option]) {
           console.warn(
-            `ReaceAce: editor option ${option} was activated but not found. Did you need to import a related tool or did you possibly mispell the option?`
+            `ReactAce: editor option ${option} was activated but not found. Did you need to import a related tool or did you possibly misspell the option?`
           );
         }
       }
