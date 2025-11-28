@@ -9,7 +9,7 @@ import { Ace, Range } from "ace-builds"; // oxlint-disable-line
 import { Split } from "ace-builds/src-noconflict/ext-split";
 import * as PropTypes from "prop-types";
 import * as React from "react";
-import isEqual from "lodash.isequal";
+import { deepEqual } from "fast-equals";
 import {
   IAceEditor,
   IAceOptions,
@@ -373,7 +373,7 @@ export default class SplitComponent extends React.Component<ISplitEditorProps> {
           editor.setOption(option as any, nextProps[option]);
         }
       }
-      if (!isEqual(nextProps.setOptions, oldProps.setOptions)) {
+      if (!deepEqual(nextProps.setOptions, oldProps.setOptions)) {
         this.handleOptions(nextProps, editor);
       }
       const nextValue = nextProps.value?.[index] ?? "";
@@ -387,13 +387,13 @@ export default class SplitComponent extends React.Component<ISplitEditorProps> {
       }
       const newAnnotations = nextProps.annotations?.[index] ?? [];
       const oldAnnotations = oldProps.annotations?.[index] ?? [];
-      if (!isEqual(newAnnotations, oldAnnotations)) {
+      if (!deepEqual(newAnnotations, oldAnnotations)) {
         editor.getSession().setAnnotations(newAnnotations);
       }
 
       const newMarkers = nextProps.markers?.[index] ?? [];
       const oldMarkers = oldProps.markers?.[index] ?? [];
-      if (!isEqual(newMarkers, oldMarkers) && Array.isArray(newMarkers)) {
+      if (!deepEqual(newMarkers, oldMarkers) && Array.isArray(newMarkers)) {
         this.handleMarkers(newMarkers, editor);
       }
     });
